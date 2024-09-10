@@ -10,7 +10,7 @@ export default function AccuracyEvaluatorPage() {
   return (
     <div className="h-screen w-screen">
       <div
-        onClick={(e) => {
+        onMouseDown={(e) => {
           onSectionClick(e)
         }}
         className="absolute h-1/2 w-1/2">
@@ -19,7 +19,7 @@ export default function AccuracyEvaluatorPage() {
         </div>
       </div>
       <div
-        onClick={(e) => {
+        onMouseDown={(e) => {
           onSectionClick(e)
         }}
         className="absolute top-1/2 h-1/2 w-1/2">
@@ -28,7 +28,7 @@ export default function AccuracyEvaluatorPage() {
         </div>
       </div>
       <div
-        onClick={(e) => {
+        onMouseDown={(e) => {
           onSectionClick(e)
         }}
         className="absolute left-1/2 h-1/2 w-1/2">
@@ -37,7 +37,7 @@ export default function AccuracyEvaluatorPage() {
         </div>
       </div>
       <div
-        onClick={(e) => {
+        onMouseDown={(e) => {
           onSectionClick(e)
         }}
         className="absolute left-1/2 top-1/2 h-1/2 w-1/2">
