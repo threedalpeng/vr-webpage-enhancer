@@ -9,6 +9,7 @@ interface Point {
 export default function useAccuracyEvaluator() {
   const [prevClickPoint, updatePrevClickPoint] = useImmer<Point | null>(null)
   const [gaps, updateGaps] = useImmer<number[]>([])
+  const [timestamps, updateTimestamps] = useImmer<number[]>([])
   const gapAvgScore = useMemo(
     () =>
       gaps.length === 0 ? 0 : gaps.reduce((a, b) => a + b, 0) / gaps.length,
@@ -48,6 +49,58 @@ export default function useAccuracyEvaluator() {
   }
 
   const onSectionClick = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = (e.target as HTMLDivElement).getBoundingClientRect()
+    const targetCenter = {
+      x: (rect.left + rect.right) / 2,
+      y: (rect.top + rect.bottom) / 2
+    }
+    const clickPoint = { x: e.clientX, y: e.clientY }
+    if (prevClickPoint === null) {
+      updatePrevClickPoint((point) => (point = clickPoint))
+      return
+    }
+    const moveDelta = {
+      x: clickPoint.x - prevClickPoint.x,
+      y: clickPoint.y - prevClickPoint.y
+    }
+    console.log(targetCenter, moveDelta, clickPoint)
+
+    const gap = evaluateGap(targetCenter, clickPoint, moveDelta)
+    updateGaps((gaps) => {
+      console.log("gap:", gap, [...gaps])
+      gaps.push(gap)
+    })
+
+    console.log(gapAvgScore)
+  }
+
+  const onCircleClick = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = (e.target as HTMLDivElement).getBoundingClientRect()
+    const targetCenter = {
+      x: (rect.left + rect.right) / 2,
+      y: (rect.top + rect.bottom) / 2
+    }
+    const clickPoint = { x: e.clientX, y: e.clientY }
+    if (prevClickPoint === null) {
+      updatePrevClickPoint((point) => (point = clickPoint))
+      return
+    }
+    const moveDelta = {
+      x: clickPoint.x - prevClickPoint.x,
+      y: clickPoint.y - prevClickPoint.y
+    }
+    console.log(targetCenter, moveDelta, clickPoint)
+
+    const gap = evaluateGap(targetCenter, clickPoint, moveDelta)
+    updateGaps((gaps) => {
+      console.log("gap:", gap, [...gaps])
+      gaps.push(gap)
+    })
+
+    console.log(gapAvgScore)
+  }
+
+  const onOutsideClick = () => {
     const rect = (e.target as HTMLDivElement).getBoundingClientRect()
     const targetCenter = {
       x: (rect.left + rect.right) / 2,
