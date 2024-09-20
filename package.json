@@ -10,15 +10,13 @@
     "package": "plasmo package"
   },
   "dependencies": {
-    "@google/model-viewer": "^3.5.0",
     "@plasmohq/messaging": "^0.6.2",
     "@plasmohq/storage": "^1.12.0",
     "immer": "^10.1.1",
-    "plasmo": "0.89.1",
+    "plasmo": "0.89.2",
     "query-selector-shadow-dom": "^1.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "three": "^0.168.0",
     "use-immer": "^0.10.0"
   },
   "devDependencies": {
@@ -42,7 +40,8 @@
       "https://*/*"
     ],
     "permissions": [
-      "scripting"
+      "scripting",
+      "storage"
     ]
   }
 }
